@@ -1,5 +1,5 @@
 <template>
-  <div class="log-item" @click="showToggle()" :class="{open: showChildren }">
+  <div class="log-item" @click="showToggle()" :class="{open: showChildren, multi: !!item.children }">
     <template v-if="item.type">
       <span class="time">{{item.time}}</span>
       <span class="type">{{item.type}}</span>
@@ -41,14 +41,14 @@
   .log-item {
     position: relative;
 
-    &:after {
+    &.multi:after {
       position: absolute;
       top: 0;
       right: 3px;
       content: "+";
     }
 
-    &.open:after {
+    &.multi.open:after {
       content: "-";
     }
   }

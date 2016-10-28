@@ -1,13 +1,13 @@
 <template>
   <div class="log-input">
     <textarea
-      v-if="shown"
+      v-show="shown"
       v-model="src"
       placeholder="paste logs here"
       @change="updateLogSource"
       ></textarea>
-    <button class="hide" v-if="shown" @click="hide()" value="^" />
-    <button class="show" v-else @click="show()" value="v" />
+    <button class="hide" v-show="shown" @click="hide()">^</button>
+    <button class="show" v-show="!shown" @click="show()">v</button>
   </div>
 </template>
 
