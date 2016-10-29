@@ -8,6 +8,7 @@ const store = new Vuex.Store({
     sourceLogs: '',
     filterInclude: '',
     filterExclude: '',
+    filterPlugin: '',
     filterTypes: [],
     settings: {
 
@@ -40,8 +41,10 @@ const store = new Vuex.Store({
     filteredLogs: (state, getters) => {
       const reInclude = new RegExp(state.filterInclude)
       const reExclude = new RegExp(state.filterExclude)
+      const rePlugin = new RegExp(state.filterPlugin)
       const filtered = getters.parsedLogs.filter(l => {
         return (state.filterTypes.length === 0 || state.filterTypes.includes(l.type)) &&
+          (!state.filterPlugin || l.plugin.match(rePlugin)) &&
           (!state.filterInclude || l.message.match(reInclude)) &&
           (!state.filterExclude || !l.message.match(reExclude))
       })
@@ -54,6 +57,9 @@ const store = new Vuex.Store({
     },
     updateInclude: (state, {include}) => {
       state.filterInclude = include
+    },
+    updatePluginMatch: (state, {str}) => {
+      state.filterPlugin = str
     },
     updateTypeFilters: (state, {types}) => {
       state.filterTypes = types
@@ -77,11 +83,12 @@ function parseMultiLine (block) {
 }
 
 function parseSingleLine (line) {
-  const [time, logType, message] = line.split('|')
+  const [time, logType, plugin, message] = line.split('|')
   return {
     time: time || '',
+    plugin: message ? plugin : '',
     type: logType ? logType.trim().toLowerCase() : '',
-    message: message || line,
+    message: message || plugin || line,
     show: true,
     children: false
   }

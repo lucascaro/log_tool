@@ -2,6 +2,7 @@
   <div class="log-display" :style="dynamicStyle">
   Include: <input :value="include" @change="updateInclude" />
   Exclude: <input :value="exclude" @change="updateExclude" />
+  Plugin: <input v-model.lazy="pluginMatch" />
   Types:
   <input type="checkbox" id="always" value="always" v-model="checkedTypes">
   <label for="always">Always</label>
@@ -44,6 +45,14 @@
       dynamicStyle () {
         return {
           fontSize: '12px'
+        }
+      },
+      pluginMatch: {
+        get () {
+          return this.$store.state.filterPlugin
+        },
+        set (str) {
+          this.$store.commit('updatePluginMatch', {str})
         }
       },
       checkedTypes: {

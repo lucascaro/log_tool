@@ -3,6 +3,7 @@
     <template v-if="item.type">
       <span class="time">{{item.time}}</span>
       <span class="type">{{item.type}}</span>
+      <span class="plugin">{{item.plugin}}</span>
       <span class="message">{{item.message}}</span>
       <div class="children" v-show="showChildren" v-if="!!item.children">
         <div class="child" v-for="child in item.children">
@@ -41,6 +42,9 @@
   .log-item {
     position: relative;
 
+    span {
+      padding: 2px 5px;
+    }
     &.multi:after {
       position: absolute;
       top: 0;
