@@ -1,5 +1,5 @@
 <template>
-  <div class="log-item" @click="showToggle()" :class="{open: showChildren, multi: !!item.children }">
+  <div class="log-item" @click="showToggle()" v-show="item.show" :class="[{open: showChildren, multi: !!item.children }, item.type]">
     <template v-if="item.type">
       <span class="time">{{item.time}}</span>
       <span class="type">{{item.type}}</span>
@@ -41,6 +41,24 @@
 <style lang="stylus" scoped>
   .log-item {
     position: relative;
+    padding: 2px 0;
+    border-bottom: 1px solid #ddd;
+
+    &.error {
+      background: #faa;
+    }
+
+    &.warn {
+      background: #ffa;
+    }
+
+    &.okay {
+      background: #afa;
+    }
+
+    &.always {
+      background: #eee;
+    }
 
     span {
       padding: 2px 5px;

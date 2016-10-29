@@ -17,7 +17,8 @@ const store = new Vuex.Store({
   getters: {
     parsedLogs: (state) => {
       let block = []
-      return state.sourceLogs.split('\n').reduce((p, c, i, a) => {
+      console.time('parsedLogs')
+      const logs = state.sourceLogs.split('\n').reduce((p, c, i, a) => {
         if (block.length === 0) {
           if (!isBlockMarker(c)) {
             p.push(parseSingleLine(c))
@@ -34,20 +35,26 @@ const store = new Vuex.Store({
         }
         return p
       }, [])
-      // return state.sourceLogs.split('\n').map(m => {
-      //   return parseSingleLine(m)
-      // })
+      .map((item, i) => {
+        return Object.assign({id: i}, item)
+      })
+      console.timeEnd('parsedLogs')
+      return logs
     },
     filteredLogs: (state, getters) => {
+      console.time('filteredLogs')
       const reInclude = new RegExp(state.filterInclude)
       const reExclude = new RegExp(state.filterExclude)
       const rePlugin = new RegExp(state.filterPlugin)
-      const filtered = getters.parsedLogs.filter(l => {
-        return (state.filterTypes.length === 0 || state.filterTypes.includes(l.type)) &&
+      const filtered = getters.parsedLogs.map(l => {
+        const show = (state.filterTypes.length === 0 || state.filterTypes.includes(l.type)) &&
           (!state.filterPlugin || l.plugin.match(rePlugin)) &&
           (!state.filterInclude || l.message.match(reInclude)) &&
           (!state.filterExclude || !l.message.match(reExclude))
+        l.show = show
+        return Object.assign({show}, l)
       })
+      console.timeEnd('filteredLogs')
       return filtered
     }
   },

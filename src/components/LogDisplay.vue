@@ -13,7 +13,7 @@
   <input type="checkbox" id="warn" value="warn" v-model="checkedTypes">
   <label for="warn">Warn</label>
     <ul>
-      <li v-for="item of logItems" :class="item.type" v-show="item.show">
+      <li v-for="item of logItems" :key="item.id">
         <log-item-display :item="item" />
       </li>
     </ul>
@@ -86,24 +86,7 @@
     padding:0;
 
     li {
-      padding: 2px 0;
-      border-bottom: 1px solid #ddd;
 
-      &.error {
-        background: #faa;
-      }
-
-      &.warn {
-        background: #ffa;
-      }
-
-      &.okay {
-        background: #afa;
-      }
-
-      &.always {
-        background: #eee;
-      }
     }
   }
 }
