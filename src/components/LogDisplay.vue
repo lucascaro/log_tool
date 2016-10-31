@@ -12,11 +12,9 @@
   <label for="error">Error</label>
   <input type="checkbox" id="warn" value="warn" v-model="checkedTypes">
   <label for="warn">Warn</label>
-    <ul>
-      <li v-for="item of logItems" :key="item.id">
-        <log-item-display :item="item" />
-      </li>
-    </ul>
+  <div class="log-items">
+    <log-item-display v-for="item of logItems" :key="item.id" :item="item" />
+  </div>
   </div>
 </template>
 
@@ -80,14 +78,5 @@
 .log-display {
   font-family: monospace;
   text-align: left;
-
-  ul {
-    list-style: none;
-    padding:0;
-
-    li {
-
-    }
-  }
 }
 </style>
