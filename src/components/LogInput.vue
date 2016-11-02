@@ -3,7 +3,7 @@
     <textarea
       v-show="shown"
       v-model="src"
-      placeholder="paste logs here"
+      placeholder="paste logs here or drag and drop a file anywhere"
       @change="updateLogSource"
       ></textarea>
     <button class="hide" v-show="shown" @click="hide()">Hide input</button>
