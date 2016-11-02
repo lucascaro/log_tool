@@ -43,7 +43,7 @@
 
 <style scoped>
 textarea {
-  width: 100%;
+  width: 99%;
   height: 200px;
 }
 </style>

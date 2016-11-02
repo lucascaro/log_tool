@@ -11,6 +11,7 @@ const store = new Vuex.Store({
     filterPlugin: '',
     totalLines: 0,
     filterTypes: [],
+    dragging: false,
     settings: {
 
     }
@@ -78,6 +79,9 @@ const store = new Vuex.Store({
     },
     updateExclude: (state, {exclude}) => {
       state.filterExclude = exclude
+    },
+    updateDragging: (state, {value}) => {
+      state.dragging = value
     }
   }
 })
