@@ -38,7 +38,7 @@
 </script>
 
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .log-item {
     position: relative;
     padding: 2px 0;
@@ -72,6 +72,14 @@
 
     &.multi.open:after {
       content: "-";
+    }
+
+    .children {
+      border: 1px solid #ddd;
+
+      .message {
+        padding-left: 50px;
+      }
     }
   }
 </style>

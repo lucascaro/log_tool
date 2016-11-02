@@ -6,8 +6,8 @@
       placeholder="paste logs here"
       @change="updateLogSource"
       ></textarea>
-    <button class="hide" v-show="shown" @click="hide()">^</button>
-    <button class="show" v-show="!shown" @click="show()">v</button>
+    <button class="hide" v-show="shown" @click="hide()">Hide input</button>
+    <button class="show" v-show="!shown" @click="show()">Show log input</button>
   </div>
 </template>
 

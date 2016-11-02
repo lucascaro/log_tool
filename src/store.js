@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     filterInclude: '',
     filterExclude: '',
     filterPlugin: '',
+    totalLines: 0,
     filterTypes: [],
     settings: {
 
@@ -33,6 +34,7 @@ const store = new Vuex.Store({
             block = []
           }
         }
+        state.totalLines = p.length
         return p
       }, [])
       .map((item, i) => {
@@ -40,6 +42,9 @@ const store = new Vuex.Store({
       })
       console.timeEnd('parsedLogs')
       return logs
+    },
+    lineCount: (state, getters) => {
+      return getters.filteredLogs.filter(l => l.show).length
     },
     filteredLogs: (state, getters) => {
       console.time('filteredLogs')
