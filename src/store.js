@@ -7,8 +7,11 @@ const store = new Vuex.Store({
   state: {
     sourceLogs: '',
     filterInclude: '',
+    includeCaseless: false,
     filterExclude: '',
+    excludeCaseless: false,
     filterPlugin: '',
+    pluginCaseless: false,
     totalLines: 0,
     filterTypes: [],
     dragging: false,
@@ -49,9 +52,9 @@ const store = new Vuex.Store({
     },
     filteredLogs: (state, getters) => {
       console.time('filteredLogs')
-      const reInclude = new RegExp(state.filterInclude, 'i')
-      const reExclude = new RegExp(state.filterExclude, 'i')
-      const rePlugin = new RegExp(state.filterPlugin, 'i')
+      const reInclude = new RegExp(state.filterInclude, state.includeCaseless ? 'i' : '')
+      const reExclude = new RegExp(state.filterExclude, state.excludeCaseless ? 'i' : '')
+      const rePlugin = new RegExp(state.filterPlugin, state.pluginCaseless ? 'i' : '')
       const filtered = getters.parsedLogs.map(l => {
         const show = (state.filterTypes.length === 0 || state.filterTypes.includes(l.type)) &&
           (!state.filterPlugin || l.plugin.match(rePlugin)) &&
@@ -70,6 +73,15 @@ const store = new Vuex.Store({
     },
     updateInclude: (state, {include}) => {
       state.filterInclude = include
+    },
+    updateIncludeCaseless: (state, {value}) => {
+      state.includeCaseless = value
+    },
+    updateExcludeCaseless: (state, {value}) => {
+      state.excludeCaseless = value
+    },
+    updatePluginCaseless: (state, {value}) => {
+      state.pluginCaseless = value
     },
     updatePluginMatch: (state, {str}) => {
       state.filterPlugin = str

@@ -7,6 +7,7 @@
       @change="updateLogSource"
       ></textarea>
     <button class="hide" v-show="shown" @click="hide()">Hide input</button>
+    <span v-show="!shown">drag and drop a file anywhere or</span>
     <button class="show" v-show="!shown" @click="show()">Show log input</button>
   </div>
 </template>
@@ -16,7 +17,7 @@
     name: 'log-input',
     data () {
       return {
-        shown: true,
+        shown: false,
         buttonShow: 'V',
         buttonHide: '^',
         src: this.$store.state.logSource
