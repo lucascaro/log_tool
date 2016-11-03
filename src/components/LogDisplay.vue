@@ -40,9 +40,9 @@
         <input type="checkbox" id="warn" value="warn" v-model="checkedTypes">
         <label for="warn">Warn</label>
       </fieldset>
-    </div>
-    <div class="item-count">
-      Displaying: {{lineCount}} of {{totalLines}} lines.
+      <div class="item-count">
+        Displaying: {{lineCount}} of {{totalLines}} lines.
+      </div>
     </div>
     <div class="log-items">
       <log-item-display v-for="item of logItems" :key="item.id" :item="item" />
@@ -142,11 +142,17 @@
   text-align: left;
   .filter-row {
     display: flex;
+    flex-flow: row wrap;
     justify-content: center;
+
+    .item-count {
+      flex: 1 100%;
+      text-align: center;
+    }
   }
 
   fieldset {
-    display: inline-block;
+
     .filter-group {
       display: inline-flex;
       align-items: center;
