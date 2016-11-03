@@ -71,26 +71,26 @@ const store = new Vuex.Store({
     updateSource: (state, {src}) => {
       state.sourceLogs = src || ''
     },
-    updateInclude: (state, {include}) => {
-      state.filterInclude = include
+    updateInclude: (state, {value}) => {
+      state.filterInclude = value
     },
     updateIncludeCaseless: (state, {value}) => {
       state.includeCaseless = value
     },
+    updateExclude: (state, {value}) => {
+      state.filterExclude = value
+    },
     updateExcludeCaseless: (state, {value}) => {
       state.excludeCaseless = value
+    },
+    updatePlugin: (state, {value}) => {
+      state.filterPlugin = value
     },
     updatePluginCaseless: (state, {value}) => {
       state.pluginCaseless = value
     },
-    updatePluginMatch: (state, {str}) => {
-      state.filterPlugin = str
-    },
     updateTypeFilters: (state, {types}) => {
       state.filterTypes = types
-    },
-    updateExclude: (state, {exclude}) => {
-      state.filterExclude = exclude
     },
     updateDragging: (state, {value}) => {
       state.dragging = value
