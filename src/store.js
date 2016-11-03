@@ -49,9 +49,9 @@ const store = new Vuex.Store({
     },
     filteredLogs: (state, getters) => {
       console.time('filteredLogs')
-      const reInclude = new RegExp(state.filterInclude)
-      const reExclude = new RegExp(state.filterExclude)
-      const rePlugin = new RegExp(state.filterPlugin)
+      const reInclude = new RegExp(state.filterInclude, 'i')
+      const reExclude = new RegExp(state.filterExclude, 'i')
+      const rePlugin = new RegExp(state.filterPlugin, 'i')
       const filtered = getters.parsedLogs.map(l => {
         const show = (state.filterTypes.length === 0 || state.filterTypes.includes(l.type)) &&
           (!state.filterPlugin || l.plugin.match(rePlugin)) &&
