@@ -142,7 +142,7 @@
   text-align: left;
   .filter-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   fieldset {

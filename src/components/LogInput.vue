@@ -2,9 +2,8 @@
   <div class="log-input">
     <textarea
       v-show="shown"
-      v-model="src"
+      v-model.lazy="src"
       placeholder="paste logs here or drag and drop a file anywhere"
-      @change="updateLogSource"
       ></textarea>
     <button class="hide" v-show="shown" @click="hide()">Hide input</button>
     <span v-show="!shown">drag and drop a file anywhere or</span>
@@ -20,11 +19,18 @@
         shown: false,
         buttonShow: 'V',
         buttonHide: '^',
-        src: this.$store.state.logSource
+        src: this.$store.state.sourceLogs
       }
     },
     computed: {
-
+      src: {
+        get () {
+          return this.$store.state.sourceLogs
+        },
+        set (src) {
+          this.$store.commit('updateSource', {src})
+        }
+      }
     },
     methods: {
       show () {
@@ -32,10 +38,6 @@
       },
       hide () {
         this.shown = false
-      },
-      updateLogSource () {
-        this.$store.commit('updateSource', {src: this.src})
-        this.src = this.$store.state.sourceLogs
       }
     }
   }
