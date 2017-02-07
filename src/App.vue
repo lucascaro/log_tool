@@ -4,6 +4,8 @@
     :class="{dragging}"
     >
     <div class="ui">
+      <a href="https://github.com/lucascaro/logzilla">Code and feedback on github</a>
+      <br>
       <img src="./assets/logo.png">
       <log-input></log-input>
       <log-display></log-display>
