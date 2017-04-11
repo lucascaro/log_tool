@@ -1,4 +1,4 @@
-# logzilla
+# log_tool
 
 > A log cruncher
 
